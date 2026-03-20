@@ -1,4 +1,4 @@
 
-== ceiling mounted AC/DC converter ==
+# ceiling mounted AC/DC converter
 
 untested
