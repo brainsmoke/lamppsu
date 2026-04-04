@@ -9,6 +9,7 @@ $fn=100;
 
 pcb_height=1.6;
 silk_height=.2;
+stack_spacing=2.4;
 
 module pcb_edges()
 {
@@ -48,18 +49,22 @@ module _pcb_holes(d)
 
 module lamp_psu()
 {
-	color("green")
-	difference()
-	{
-		pcb_edges();
-		_pcb_holes(3.2);
-	}
-
-	color("white")
 	on_pcb()
-	translate([-45,-45,--e])
-	linear_extrude(height=e+silk_height)
-	import("silk.svg");
+	translate([0,0,stack_spacing])
+	{
+		color("green")
+		difference()
+		{
+			pcb_edges();
+			_pcb_holes(3.2);
+		}
+
+		color("white")
+		on_pcb()
+		translate([-45,-45,--e])
+		linear_extrude(height=e+silk_height)
+		import("silk.svg");
+	}
 }
 
 module lamp_guard()
@@ -78,16 +83,22 @@ module on_pcb()
 	children();
 }
 
-preview()
+module on_pcb_2()
+{
+	on_pcb()
+	translate([0,0,stack_spacing])
+	on_pcb()
+	children();
+}
+
+module pcb_stack()
 {
 	lamp_guard();
 
-	translate([0,0,5])
-	{
-		lamp_psu();
+	lamp_psu();
 
-		on_pcb()
-		{
+	on_pcb_2()
+	{
 		translate([15,32])
 		rotate([0,0,-90])
 		pcb_wago(2);
@@ -101,6 +112,8 @@ preview()
 
 		translate([0,4.5])
 		irm_30();
-		}
 	}
 }
+
+preview()
+pcb_stack();

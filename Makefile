@@ -21,10 +21,10 @@ LAYERS4=$(LAYERS2) In1.Cu In2.Cu
 LAYERS :=$(LAYERS2)
 
 SCAD_DIR=case
-SCAD_DEPS=case/case_base.scad case/usb.scad case/button.scad
+SCAD_DEPS=case/model.scad case/pcb.scad case/wago.scad case/fuse.scad case/mw_irm.scad case/utils.scad
 SCAD_PARAM_DIR=case/parameters
 SCAD_PARAM_SET=default
-SCAD_PARTS=
+SCAD_PARTS=lamppsu/cover lamppsu/clamp_base lamppsu/clamp_clamp lamppsu/cover_latches lamppsu/flute
 
 SCAD_DEFINES=
 
