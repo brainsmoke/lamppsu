@@ -21,7 +21,7 @@ screw_surface_thickness=1.6;
 wire_thickness=6;
 wire_bend_r = 5;
 
-clamp_screw_size=2.8;
+clamp_screw_size=3.3;
 clamp_nut_size=5.5;
 
 pcb_screw_holes = 3.3;
@@ -273,6 +273,7 @@ module print_cover()
 
 module print_clamp_clamp()
 {
+	rotate([-120,0,0])
 	translate([0,0,cover_h-bottom-m])
 	rotate([180,0,0])
 	clamp_clamp();
