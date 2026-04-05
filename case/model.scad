@@ -16,13 +16,15 @@ rib_size_top=3;
 rib_width = 0.8;
 n_ribs=4;
 
-screw_surface_thickness=1.6;
+screw_surface_thickness=2;
+
+internal_fillet=2;
 
 wire_thickness=6;
 wire_bend_r = 5;
 
 clamp_screw_size=3.3;
-clamp_nut_size=5.5;
+clamp_nut_size=5.7;
 
 pcb_screw_holes = 3.3;
 
@@ -157,31 +159,51 @@ module wire_clamp()
 
 				union()
 				{
-					translate([0,-5,0])
-					block([200,1.6,200],anchor=[0,-1,0]);
+					translate([0,-5.5,0])
+					block([200,screw_surface_thickness,200],anchor=[0,-1,0]);
 
 					on_pcb_2()
-					translate([0,-5,0])
-					block([200,10,screw_surface_thickness],anchor=[0,-1,-1]);
+					translate([0,-5.5,0])
+					block([200,11,screw_surface_thickness],anchor=[0,-1,-1]);
+
+					hull()
+				{
+					intersection()
+					{
+						at_irm()
+						irm_30_cover(m=.5+1.5);
+
+						translate([0,-5.5+screw_surface_thickness,0])
+						block([200,internal_fillet,200],anchor=[0,-1,0]);
+					}
+					intersection()
+					{
+						at_irm()
+						irm_30_cover(m=.5+1.5+internal_fillet);
+
+						translate([0,-5.5+screw_surface_thickness-e,0])
+						block([200,e,200],anchor=[0,-1,0]);
+					}
+				}
 
 					intersection()
 					{
 						at_irm()
-						irm_30_cover(m=1.5);
+						irm_30_cover(m=.5+1.5);
 
-						translate([0,-5,0])
-						block([200,10,200],anchor=[0,-1,0]);
+						translate([0,-5.5,0])
+						block([200,11,200],anchor=[0,-1,0]);
 					}
 
 			for (i=[-1, 1])
 			difference()
 			{
-				translate([i*39,-5,25])
-				block([8.1,10,1.6],anchor=[0,-1,-1]);
+				translate([i*39,-5.5,25])
+				block([8.1,11,screw_surface_thickness],anchor=[0,-1,-1]);
 
 				translate([i*64,-4,20])
 				rotate([0,0,i*42])
-				block([30,30,30],anchor=[0,-1,0]);
+				block([30.5,30,30],anchor=[0,-1,0]);
 			}
 
 
@@ -194,11 +216,11 @@ module wire_clamp()
 			for (x=[-30,30])
 			difference()
 			{
-				translate([x,-5,30])
-				block([1.6,10,9.9],anchor=[0,-1,-1]);
+				translate([x,-5.5,30])
+				block([screw_surface_thickness,11,9.9],anchor=[0,-1,-1]);
 
-				translate([x,-4,42])
-				rotate([130,0,0])
+				translate([x,-4,40.4])
+				rotate([137,0,0])
 				block([30,30,30],anchor=[0,0,1]);
 			}
 
@@ -237,7 +259,7 @@ module clamp_split()
 {
 	translate([0,-1.3,42])
 	rotate([120,0,0])
-	block([50,50,50], anchor=[0,0,1]);
+	block([28+e,50,50], anchor=[0,0,1]);
 }
 
 
