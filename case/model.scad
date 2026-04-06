@@ -20,7 +20,7 @@ screw_surface_thickness=2;
 
 internal_fillet=2;
 
-wire_thickness=6;
+wire_thickness=5.7;
 wire_bend_r = 5;
 
 clamp_screw_size=3.3;
