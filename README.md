@@ -11,5 +11,3 @@ Using [Flame retardant filament](https://www.formfutura.com/filaments/petg/premi
 <img src="img/pcb_populated.jpg" width="512">
 <img src="img/result.jpg" width="512">
 
-
-Untested
